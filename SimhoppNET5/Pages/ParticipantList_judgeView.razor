@@ -1,0 +1,81 @@
+﻿@using SimhoppNET5.Data
+@page "/ParticipantsScore"
+@*@inject IParticipantsService ParticipantsService*@
+@inject IScoreServices ScoreService
+@inject IParticipantsService ParticipantService 
+@attribute [Authorize(Roles = "Admin, Judge1, Judge2, Judge3")]
+
+<h1>ScoreList</h1>
+@if (scores == null)
+{
+    <h1>Loading...</h1>
+
+}
+else
+{
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Add Score </th>
+                <th>ID </th>
+                <th>First Name </th>
+                <th>Last Name </th>
+                <th>Judge 1</th>
+                <th>Judge 2</th>
+                <th>Judge 3</th>
+                <th>Difficulty </th>
+                <th>Total </th>
+
+
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var score in scores)
+            {
+                @foreach (var participant in participants)
+                {
+                    if (score.Score_ID == participant.ID)
+                    {
+                        <tr>
+                            <td>
+                                <a href="ParticipantsScoreAdd/@score.Score_ID">
+                                    <SfButton Content="Add Score" CssClass="e-primary"></SfButton>
+                                </a>
+                            </td>
+                            <td>@score.Score_ID</td>
+                            <td>@participant.FirstName</td>
+                            <td>@participant.LastName</td>
+                            <td>@score.Judge1_result </td>
+                            <td>@score.Judge2_result </td>
+                            <td>@score.Judge3_result </td>
+                            <td>@score.Difficulty </td>
+                            <td>@score.Total_results </td>
+                            
+
+
+                        </tr>
+
+                    }
+
+                }
+
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    //IEnumerable<Participants> participants;
+    IEnumerable<Scores> scores;
+    IEnumerable<Participants> participants;
+
+    protected override async Task OnInitializedAsync()
+    {
+      
+        scores = await ScoreService.ScoreList();
+        participants = await ParticipantService.ParticipantsList();
+    }
+
+}

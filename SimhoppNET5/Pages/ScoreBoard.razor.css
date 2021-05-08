@@ -1,0 +1,241 @@
+﻿html, body {
+    min-height: 100%;
+    background-image: url("/wwwroot/css/bg.jpg")
+}
+
+body, div, form, input, select, p {
+    padding: 0;
+    margin: 0;
+    outline: none;
+    font-family: Roboto, Arial, sans-serif;
+    font-size: 16px;
+    color: #eee;
+}
+
+body {
+    background: url("/Image/image.jpeg") no-repeat center;
+    background-size: cover;
+}
+
+
+
+h2 {
+    text-transform: uppercase;
+    font-weight: 400;
+    margin: 0 0 0 8px;
+}
+
+.main-block {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding: 25px;
+    background: #113161d1;
+}
+
+.left-part, form {
+    padding: 25px;
+}
+
+.left-part {
+    text-align: center;
+}
+
+.fa-graduation-cap {
+    font-size: 72px;
+}
+
+form {
+    background: rgba(22, 41, 54, 0.7);
+}
+
+.title {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+}
+
+input, select {
+    padding: 5px;
+    margin-bottom: 30px;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #eee;
+}
+
+    input::placeholder {
+        color: #eee;
+    }
+
+option:focus {
+    border: none;
+}
+
+option {
+    background: black;
+    border: none;
+}
+
+.checkbox input {
+    margin: 0 10px 0 0;
+    vertical-align: middle;
+}
+
+.checkbox a {
+    color: #26a9e0;
+}
+
+    .checkbox a:hover {
+        color: #85d6de;
+    }
+
+.btn-item, button {
+    padding: 10px 5px;
+    margin-top: 20px;
+    border-radius: 5px;
+    border: none;
+    background: #26a9e0;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 400;
+    color: #fff;
+}
+
+.btn-item {
+    display: inline-block;
+    margin: 20px 5px 0;
+}
+
+button {
+    width: 100%;
+}
+
+    button:hover, .btn-item:hover {
+        background: #85d6de;
+    }
+
+@media (min-width: 568px) {
+    html, body {
+        height: 100%;
+    }
+
+    .main-block {
+        flex-direction: row;
+        height: calc(100% - 50px);
+    }
+
+    .left-part, form {
+        flex: 1;
+        height: auto;
+    }
+}
+
+
+
+h1 {
+    font-size: 30px;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: 300;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+table {
+    width: 100%;
+    table-layout: fixed;
+}
+
+.tbl-header {
+    background-color: rgba(255,255,255,0.3);
+}
+
+.tbl-content {
+    height: 500px;
+    overflow-x: auto;
+    margin-top: 0px;
+    border: 1px solid rgba(255,255,255,0.3);
+}
+
+th {
+    padding: 20px 15px;
+    text-align: left;
+    font-weight: 500;
+    font-size: 12px;
+    color: #fff;
+    text-transform: uppercase;
+}
+
+td {
+    padding: 15px;
+    text-align: left;
+    vertical-align: middle;
+    font-weight: 300;
+    font-size: 12px;
+    color: #fff;
+    border-bottom: solid 1px rgba(255,255,255,0.1);
+}
+
+
+/* demo styles */
+
+body {
+    background: -webkit-linear-gradient(left, #25c481, #25b7c4);
+    background: linear-gradient(to right, #113161d1, #25b7c4);
+    font-family: 'Roboto', sans-serif;
+}
+
+section {
+    margin: 50px;
+}
+
+
+/* follow me template */
+.made-with-love {
+    margin-top: 40px;
+    padding: 10px;
+    clear: left;
+    text-align: center;
+    font-size: 10px;
+    font-family: arial;
+    color: #fff;
+}
+
+    .made-with-love i {
+        font-style: normal;
+        color: #F50057;
+        font-size: 14px;
+        position: relative;
+        top: 2px;
+    }
+
+    .made-with-love a {
+        color: #fff;
+        text-decoration: none;
+    }
+
+        .made-with-love a:hover {
+            text-decoration: underline;
+        }
+
+
+/* for custom scrollbar for webkit browser*/
+
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+
+::-webkit-scrollbar-thumb {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}

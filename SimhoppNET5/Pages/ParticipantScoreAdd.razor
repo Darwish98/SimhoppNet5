@@ -1,0 +1,89 @@
+﻿@using SimhoppNET5.Data
+@using System
+
+@page "/ParticipantsScoreAdd/{Score_ID:int}"
+@inject IScoreServices ScoreService
+@inject NavigationManager NavigationManager
+<h1>Add Score</h1>
+<tr style="color:red">Score value between 0-10 with 0.5 increment</tr>
+
+<EditForm Model="@score" OnValidSubmit="@ScoreSave" Context="Editform">
+    <table class="editform">
+        <AuthorizeView Roles="Judge1, Admin" Context="Auth1">
+            <tr>
+                <td>Difficulty</td>
+                <td><input type="text" @bind="score.Difficulty" required /></td>
+            </tr>
+            <tr>
+                <td>Judge1</td>
+                <td><input type="text" placeholder="Value between 0-10" @bind="score.Judge1_result" required /></td>
+            </tr>
+
+        </AuthorizeView>
+        <AuthorizeView Roles="Judge2 , Admin">
+            <tr>
+                <td>Judge2:</td>
+                <td><input type="text" placeholder="Value between 0-10" @bind="score.Judge2_result" required /></td>
+            </tr>
+        </AuthorizeView>
+        <AuthorizeView Roles="Judge3, Admin">
+            <tr>
+                <td>Judge3</td>
+                <td><input type="text" placeholder="Value between 0-10" @bind="score.Judge3_result" required /></td>
+            </tr>
+        </AuthorizeView>
+
+
+        <tr>
+            <td colspan="2" style="text-align:center">
+                <input type="submit" value="Score" />
+                <input type="button" value="Cancel" @onclick="@Cancel2" />
+            </td>
+
+        </tr>
+    </table>
+
+
+</EditForm> 
+
+
+
+
+@code {
+
+    Scores score = new Scores();
+
+    [Parameter]
+    public int Score_ID { get; set; }
+    //set default page title and button text
+
+    protected override async Task OnInitializedAsync()
+    {
+
+        score = await ScoreService.Score_GetOne(Score_ID);
+
+    }
+
+    protected async Task ScoreSave()
+    {
+        if (score.Score_ID == 0)
+        {
+            await ScoreService.ScoreUpdate(score);
+        }
+        else
+        {    //Difficulty 
+            //score.Total_results = score.Judge1_result+ score.Judge2_result+ score.Judge3_result;    //calculate avg or sum
+
+            float[] score_list = { score.Judge1_result, score.Judge2_result, score.Judge3_result };
+            Array.Sort(score_list);
+            score.Total_results = score_list[1] * 3 * score.Difficulty;
+            await ScoreService.ScoreUpdate(score);
+
+        }
+        NavigationManager.NavigateTo("/ParticipantsScore");
+    }
+    void Cancel2()
+    {
+        NavigationManager.NavigateTo("/ParticipantsScore");
+    }
+}

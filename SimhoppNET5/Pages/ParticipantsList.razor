@@ -1,0 +1,81 @@
+﻿@using SimhoppNET5.Data
+@page "/ParticipantList"
+@inject IParticipantsService ParticipantsService
+@attribute [Authorize(Roles = "Admin")]
+
+
+@if (participants == null)
+{
+    <h1>Loading...</h1>
+
+}
+else
+{
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+    </head>
+    <body>
+
+        <section>
+            <!--for demo wrap-->
+            <h1>Participants List</h1>
+            <div class="tbl-header">
+                <table cellpadding="0" cellspacing="0" border="0">
+                    <thead>
+                        <tr>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Age</th>
+                            <th>Email</th>
+                            <th>Club</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+            <div class="tbl-content">
+                <table cellpadding="0" cellspacing="0" border="0">
+                    <tbody>
+                        @foreach (var participant in participants)
+                        {
+                            <tr>
+                                <td>
+                                    <a href="ParticipantAddEdit/@participant.ID">
+                                        <SfProgressButton Content="Edit" CssClass="e-primary"></SfProgressButton>
+                                    </a>
+                                    <a href="Participantdelete/@participant.ID">
+                                        <SfProgressButton Content="Delete" CssClass="e-danger"></SfProgressButton>
+                                    </a>
+                                </td>
+
+                                <td>@participant.FirstName</td>
+                                <td>@participant.LastName</td>
+                                <td>@participant.Age</td>
+                                <td>@participant.EmailAddress</td>
+                                <td>@participant.club</td>
+
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </body>
+</html>
+
+
+}
+
+@code {
+    IEnumerable<Participants> participants;
+
+    protected override async Task OnInitializedAsync()
+    {
+        participants = await ParticipantsService.ParticipantsList();
+    }
+}

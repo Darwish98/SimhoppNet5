@@ -1,0 +1,66 @@
+﻿@using SimhoppNET5.Data
+
+@page "/Participantdelete/{ID:int}"
+@inject IParticipantsService ParticipantsService
+@inject NavigationManager NavigationManager
+@attribute [Authorize(Roles = "Admin")]
+
+<h1>Delete a Participant</h1>
+<p style="color:red;text-align:center">Are you sure you want to permanently delete this participant?</p>
+
+
+<table class="editform">
+    <tr>
+        <td>First Name:</td>
+        <td><input type="text" @bind="participants.FirstName" required /></td>
+    </tr>
+    <tr>
+        <td>Last Name:</td>
+        <td><input type="text" @bind="participants.LastName" required /></td>
+    </tr>
+    <tr>
+        <td>Age:</td>
+        <td><input type="text" @bind="participants.Age" required /></td>
+    </tr>
+    <tr>
+        <td>Email:</td>
+        <td><input type="text" @bind="participants.EmailAddress" required /></td>
+    </tr>
+    <tr>
+        <td>Club:</td>
+        <td><input type="text" @bind="participants.club" required /></td>
+    </tr>
+
+    <tr>
+        <td colspan="2" style="text-align:center">
+            <input type="button" value="Delete" @onclick="@Delete" />
+            <input type="button" value="Cancel" @onclick="@Cancel" />
+        </td>
+
+
+    </tr>
+</table>
+
+
+@code {
+    Participants participants = new Participants();
+
+    [Parameter]
+    public int ID { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        participants = await ParticipantsService.Participants_GetOne(ID);
+
+    }
+
+    protected async Task Delete()
+    {
+        await ParticipantsService.ParticipantsDelete(ID);
+        NavigationManager.NavigateTo("/ParticipantList");
+    }
+    void Cancel()
+    {
+        NavigationManager.NavigateTo("/ParticipantList");
+    }
+}
