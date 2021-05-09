@@ -20,14 +20,14 @@
             </div>
             <div class="info">
                 <AuthorizeView Roles="Judge1, Admin" Context="Auth1">
-                    <input class="fname" type="text" @bind="score.Difficulty" name="name" placeholder="Difficulty" required>
-                    <input class="fname" type="text" @bind="score.Judge1_result" name="name" placeholder="Judge1_result" required>
+                    <input class="fname" type="number" @bind="score.Difficulty" name="name" placeholder="Difficulty" min="0" max="10" required>
+                    <input class="fname" type="number" @bind="score.Judge1_result" name="name" placeholder="Judge1_result"  min="0" max="10" required>
                 </AuthorizeView>
                 <AuthorizeView Roles="Judge2 , Admin">
-                    <input class="fname" type="text" @bind="score.Judge2_result" name="name" placeholder="Judge2_result" required>
+                    <input class="fname" type="number" @bind="score.Judge2_result" name="name" placeholder="Judge2_result"  min="0" max="10" required>
                 </AuthorizeView>
                 <AuthorizeView Roles="Judge3, Admin">
-                    <input class="fname" type="text" @bind="score.Judge3_result" name="name" placeholder="Judge3_result" required>
+                    <input class="fname" type="number" @bind="score.Judge3_result" name="name" placeholder="Judge3_result" min="0" max="10" required>
                 </AuthorizeView>
 
             </div>

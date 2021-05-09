@@ -21,7 +21,7 @@
             <div class="info">
                 <input class="fname" type="text" @bind="participants.FirstName" name="name" placeholder="First name" required>
                 <input class="fname" type="text" @bind="participants.LastName" name="name" placeholder="Last name" required>
-                <input class="fname" type="text" @bind="participants.Age" name="name" placeholder="Age" required>
+                <input class="fname" type="number" @bind="participants.Age" name="name" placeholder="Age"  min=0 max=50  required>
                 <input class="fname" type="text" @bind="participants.club" name="name" placeholder="Club" required>
                 <input class="fname" type="text" @bind="participants.EmailAddress" name="name" placeholder="E-mail" required>
 
