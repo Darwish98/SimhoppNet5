@@ -13,7 +13,8 @@ body, div, form, input, select, p {
 }
 
 body {
-    background-image: url("/wwwroot/css/bg.jpg") background-size: cover;
+    background-size: cover;
+    background-image: url("/wwwroot/css/bg.jpg")
 }
 
 

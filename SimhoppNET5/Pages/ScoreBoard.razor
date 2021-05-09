@@ -2,13 +2,13 @@
 @using SimhoppNET5.Data
 @using Microsoft.AspNetCore.SignalR.Client
 @inject NavigationManager NavigationManager
-@page "/ScoreBoard"
+@page "/Scoreboard"
 @inject IParticipantsService ParticipantsService
 
 
 @if (participants32 == null)
 {
-    <h1>Loading...</h1>
+    <img src="/css/VAyR.gif" />
 
 }
 else

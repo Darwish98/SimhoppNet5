@@ -4,9 +4,51 @@
 @page "/ParticipantsScoreAdd/{Score_ID:int}"
 @inject IScoreServices ScoreService
 @inject NavigationManager NavigationManager
-<h1>Add Score</h1>
-<tr style="color:red">Score value between 0-10 with 0.5 increment</tr>
 
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+</head>
+<body>
+    <div class="main-block">
+        <EditForm Model="@score" OnValidSubmit="@ScoreSave" Context="Editform">
+            <div class="title">
+                <i class="fas fa-pencil-alt"></i>
+                <h2>Update Score</h2>
+            </div>
+            <div class="info">
+                <AuthorizeView Roles="Judge1, Admin" Context="Auth1">
+                    <input class="fname" type="text" @bind="score.Difficulty" name="name" placeholder="Difficulty" required>
+                    <input class="fname" type="text" @bind="score.Judge1_result" name="name" placeholder="Judge1_result" required>
+                </AuthorizeView>
+                <AuthorizeView Roles="Judge2 , Admin">
+                    <input class="fname" type="text" @bind="score.Judge2_result" name="name" placeholder="Judge2_result" required>
+                </AuthorizeView>
+                <AuthorizeView Roles="Judge3, Admin">
+                    <input class="fname" type="text" @bind="score.Judge3_result" name="name" placeholder="Judge3_result" required>
+                </AuthorizeView>
+
+            </div>
+            <button type="submit">Update</button>
+            <button @onclick="@Cancel">Cancel</button>
+        </EditForm>
+        <div class="left-part">
+            <i class="fas fa-graduation-cap"></i>
+            <h1>Diving News</h1>
+            <p>Click on the button latest diving sport news </p>
+            <div class="btn-group">
+                <a class="btn-item" href="https://olympics.com/en/sports/diving/">Olympics</a>
+                <a class="btn-item" href="https://www.svensksimidrott.se/varasimidrotter/Simhopp/Nyheter">Simhopp</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+
+@*
 <EditForm Model="@score" OnValidSubmit="@ScoreSave" Context="Editform">
     <table class="editform">
         <AuthorizeView Roles="Judge1, Admin" Context="Auth1">
@@ -36,7 +78,7 @@
 
         <tr>
             <td colspan="2" style="text-align:center">
-                <input type="submit" value="Score" />
+                <input type="submit" value="score" @onclick="@ScoreSave" />
                 <input type="button" value="Cancel" @onclick="@Cancel2" />
             </td>
 
@@ -44,7 +86,7 @@
     </table>
 
 
-</EditForm> 
+</EditForm>*@
 
 
 
@@ -68,11 +110,13 @@
     {
         if (score.Score_ID == 0)
         {
+            float[] score_list = { score.Judge1_result, score.Judge2_result, score.Judge3_result };
+            Array.Sort(score_list);
+            score.Total_results = score_list[1] * 3 * score.Difficulty;
             await ScoreService.ScoreUpdate(score);
         }
         else
-        {    //Difficulty 
-            //score.Total_results = score.Judge1_result+ score.Judge2_result+ score.Judge3_result;    //calculate avg or sum
+        {
 
             float[] score_list = { score.Judge1_result, score.Judge2_result, score.Judge3_result };
             Array.Sort(score_list);
@@ -82,7 +126,7 @@
         }
         NavigationManager.NavigateTo("/ParticipantsScore");
     }
-    void Cancel2()
+    void Cancel()
     {
         NavigationManager.NavigateTo("/ParticipantsScore");
     }

@@ -55,6 +55,7 @@
                 </select>
             </div>
             <button type="submit">Update</button>
+            <button type="button" @onclick="@Cancel">Cancel</button>
         </EditForm>
         <div class="left-part">
             <i class="fas fa-graduation-cap"></i>
@@ -69,75 +70,6 @@
 </body>
 </html>
 
-@*<h1>Participant Update</h1>
-
-
-    <EditForm Model="@participants" OnValidSubmit="@ParticipantsSave">
-        <table class="editform">
-            <tr>
-                <td>First Name:</td>
-                <td><input type="text" @bind="participants.FirstName" required /></td>
-            </tr>
-            <tr>
-                <td>Last Name:</td>
-                <td><input type="text" @bind="participants.LastName" required /></td>
-            </tr>
-            <tr>
-                <td>Age:</td>
-                <td><input type="text" @bind="participants.Age" required /></td>
-            </tr>
-            <tr>
-                <td>Email:‎‎‎‎‎      </td>
-                <td><input type="text" @bind="participants.EmailAddress" required /></td>
-            </tr>
-            <tr>
-                <td>Club:</td>
-                <td><input type="text" @bind="participants.club" required /></td>
-            </tr>
-            <tr>
-                <td>Diving Group:</td>
-                <td>
-                    <SfDropDownList TItem="DiveGroup" TValue="string" PopupHeight="230px" Placeholder="Select a diving group" @bind-Value="@DropVal_DG" DataSource="@LocalData_DG">
-                        <DropDownListEvents TItem="DiveGroup" TValue="string" ValueChange="OnChange_DG"></DropDownListEvents>
-                        <DropDownListFieldSettings Text="Text" Value="ID"></DropDownListFieldSettings>
-                    </SfDropDownList>
-                </td>
-            </tr>
-
-            <tr>
-                <td>Diving position:</td>
-                <td>
-                    <SfDropDownList TItem="DivePosition" TValue="string" PopupHeight="230px" Placeholder="Select a diving position" @bind-Value="@DropVal_DP" DataSource="@LocalData_DP">
-                        <DropDownListEvents TItem="DivePosition" TValue="string" ValueChange="OnChange_DP"></DropDownListEvents>
-                        <DropDownListFieldSettings Text="Text" Value="ID"></DropDownListFieldSettings>
-                    </SfDropDownList>
-                </td>
-            </tr>
-
-            <tr>
-                <td>Number Half Somersaults:</td>
-                <td>
-                    <SfDropDownList TItem="Somersaults" TValue="string" PopupHeight="230px" Placeholder="Select the number of somersaults" @bind-Value="@DropVal_S" DataSource="@LocalData_S">
-                        <DropDownListEvents TItem="Somersaults" TValue="string" ValueChange="OnChange_S"></DropDownListEvents>
-                        <DropDownListFieldSettings Text="Text" Value="ID"></DropDownListFieldSettings>
-                    </SfDropDownList>
-                </td>
-            </tr>
-
-            <tr>
-                <td colspan="2" style="text-align:center">
-                    <input type="submit" value=Update />
-                    <input type="button" value="Cancel" @onclick="@Cancel" />
-                </td>
-
-
-            </tr>
-        </table>
-
-
-    </EditForm>
-
-*@
 
 @code {
     // Create a new, empty Video object
@@ -146,110 +78,20 @@
     [Parameter]
     public int ID { get; set; }
     //set default page title and button text
-
-    @*public class DiveGroup
-    {
-        public string ID { get; set; }
-        public string Text { get; set; }
-    }
-    List<DiveGroup> LocalData_DG = new List<DiveGroup> {
-    new DiveGroup() { ID= "Forward Dive", Text= "Forward Dive" },
-    new DiveGroup() { ID= "Backward Dive", Text= "Backward Dive" },
-    new DiveGroup() { ID= "Reverse Dive", Text= "Reverse Dive" },
-    new DiveGroup() { ID= "Inward Dive", Text= "Inward Dive" },
-    new DiveGroup() { ID= "Twisting Dive", Text= "Twisting Dive" },
-    new DiveGroup() { ID= "Armstand Dive", Text= "Armstand Dive" },
-
-      };
-
-    public string DropVal_DG;
-    public string ChangeValue_DG { get; set; }
-    public void OnChange_DG(Syncfusion.Blazor.DropDowns.ChangeEventArgs<string, DiveGroup> args)
-    {
-        this.ChangeValue_DG = args.ItemData.ID;
-
-    }
-
-    public class DivePosition
-    {
-        public string ID { get; set; }
-        public string Text { get; set; }
-    }
-    List<DivePosition> LocalData_DP = new List<DivePosition> {
-    new DivePosition() { ID= "Straight Position", Text= "Straight Position" },
-    new DivePosition() { ID= "Pike Position", Text= "Pike Position" },
-    new DivePosition() { ID= "Tuck Position", Text= "Tuck Position" },
-    new DivePosition() { ID= "Free Position", Text= "Free Position" },
-
-      };
-
-    public string DropVal_DP;
-    public string ChangeValue_DP { get; set; }
-    public void OnChange_DP(Syncfusion.Blazor.DropDowns.ChangeEventArgs<string, DivePosition> args)
-    {
-        this.ChangeValue_DP = args.ItemData.ID;
-
-    }
-
-    public class Somersaults
-    {
-        public string ID { get; set; }
-        public string Text { get; set; }
-    }
-    List<Somersaults> LocalData_S = new List<Somersaults> {
-    new Somersaults() { ID= "0", Text= "0" },
-    new Somersaults() { ID= "1", Text= "1" },
-    new Somersaults() { ID= "2", Text= "2" },
-    new Somersaults() { ID= "3", Text= "3" },
-    new Somersaults() { ID= "4", Text= "4" },
-    new Somersaults() { ID= "5", Text= "5" },
-    new Somersaults() { ID= "6", Text= "6" },
-    new Somersaults() { ID= "7", Text= "7" },
-    new Somersaults() { ID= "8", Text= "8" },
-    new Somersaults() { ID= "9", Text= "9" },
-
-      };
-
-    public string DropVal_S;
-    public string ChangeValue_S { get; set; }
-    public void OnChange_S(Syncfusion.Blazor.DropDowns.ChangeEventArgs<string, Somersaults> args)
-    {
-        this.ChangeValue_S = args.ItemData.ID;
-
-    }
-
-
-    // Set default page title and button text
-    //public string pagetitle = "Regsiter here";
-    //public string buttontext = "Add";
-    *@
+  
     protected override async Task OnInitializedAsync()
     {
         participants = await ParticipantsService.Participants_GetOne(ID);
-        @*DropVal_DG = participants.Dive_Group;
-        DropVal_DP = participants.Dive_position;
-        DropVal_S = participants.half_somersaults;
-        ChangeValue_DG = participants.Dive_Group;
-        ChangeValue_DP = participants.Dive_position;
-        ChangeValue_S = participants.half_somersaults;*@
     }
 
     protected async Task ParticipantsSave()
     {
         if (participants.ID == 0)
         {
-            @*participants.Dive_Group = ChangeValue_DG;
-            participants.Dive_position = ChangeValue_DP;
-            participants.half_somersaults = ChangeValue_S;
-            participants.Init_position = "0";*@
             await ParticipantsService.ParticipantsInsert(participants);
         }
         else
         {
-            @*participants.Dive_Group = ChangeValue_DG;
-            participants.Dive_position = ChangeValue_DP;
-            participants.half_somersaults = ChangeValue_S;
-            participants.Init_position = "0";*@
             await ParticipantsService.ParticipantsUpdate(participants);
         }
 

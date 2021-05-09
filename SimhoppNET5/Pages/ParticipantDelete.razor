@@ -5,41 +5,69 @@
 @inject NavigationManager NavigationManager
 @attribute [Authorize(Roles = "Admin")]
 
-<h1>Delete a Participant</h1>
-<p style="color:red;text-align:center">Are you sure you want to permanently delete this participant?</p>
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+</head>
+<body>
+    <div class="main-block">
+        <EditForm Model="@participants" OnValidSubmit="@Delete">
+            <div class="title">
+                <i class="fas fa-pencil-alt"></i>
+                <h2>Delete Participant</h2>
+            </div>
+            <div class="info">
+                <input class="fname" type="text" @bind="participants.FirstName" name="name" placeholder="First name" required>
+                <input class="fname" type="text" @bind="participants.LastName" name="name" placeholder="Last name" required>
+                <input class="fname" type="text" @bind="participants.Age" name="name" placeholder="Age" required>
+                <input class="fname" type="text" @bind="participants.club" name="name" placeholder="Club" required>
+                <input class="fname" type="text" @bind="participants.EmailAddress" name="name" placeholder="E-mail" required>
 
+                <select @bind="participants.Dive_Group" required>
+                    <option value="Forward Dive" selected>1- Forward Dive</option>
+                    <option value="Backward Dive">2- Backward Dive</option>
+                    <option value="Reverse Dive">3- Reverse Dive</option>
+                    <option value="Inward Dive">4- Inward Dive</option>
+                    <option value="Twisting Dive">5- Twisting Dive</option>
+                    <option value="Armstand Dive">6- Armstand Dive</option>
+                </select>
+                <select @bind="participants.Dive_position" required>
+                    <option value="Straight Position" selected>A- Straight Position</option>
+                    <option value="Pike Position">B- Pike Position</option>
+                    <option value="Tuck Position">C- Tuck Position</option>
+                    <option value="Free Position">D- Free Position</option>
+                </select>
+                <select @bind="participants.half_somersaults" required>
+                    <option value="0" selected>0 half somersaults</option>
+                    <option value="1">1 half somersaults</option>
+                    <option value="2">2 half somersaults</option>
+                    <option value="3">3 half somersaults</option>
+                    <option value="4">4 half somersaults</option>
+                    <option value="5">5 half somersaults</option>
+                    <option value="6">6 half somersaults</option>
+                    <option value="7">7 half somersaults</option>
+                    <option value="8">8 half somersaults</option>
+                    <option value="9">9 half somersaults</option>
+                </select>
+            </div>
+            <button type="submit">Delete</button>
+            <button type="button" @onclick="@Cancel">Cancel</button>
+        </EditForm>
+        <div class="left-part">
+            <i class="fas fa-graduation-cap"></i>
+            <h1>Diving News</h1>
+            <p>Click on the button latest diving sport news </p>
+            <div class="btn-group">
+                <a class="btn-item" href="https://olympics.com/en/sports/diving/">Olympics</a>
+                <a class="btn-item" href="https://www.svensksimidrott.se/varasimidrotter/Simhopp/Nyheter">Simhopp</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
 
-<table class="editform">
-    <tr>
-        <td>First Name:</td>
-        <td><input type="text" @bind="participants.FirstName" required /></td>
-    </tr>
-    <tr>
-        <td>Last Name:</td>
-        <td><input type="text" @bind="participants.LastName" required /></td>
-    </tr>
-    <tr>
-        <td>Age:</td>
-        <td><input type="text" @bind="participants.Age" required /></td>
-    </tr>
-    <tr>
-        <td>Email:</td>
-        <td><input type="text" @bind="participants.EmailAddress" required /></td>
-    </tr>
-    <tr>
-        <td>Club:</td>
-        <td><input type="text" @bind="participants.club" required /></td>
-    </tr>
-
-    <tr>
-        <td colspan="2" style="text-align:center">
-            <input type="button" value="Delete" @onclick="@Delete" />
-            <input type="button" value="Cancel" @onclick="@Cancel" />
-        </td>
-
-
-    </tr>
-</table>
 
 
 @code {

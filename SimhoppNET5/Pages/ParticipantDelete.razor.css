@@ -13,17 +13,15 @@ body, div, form, input, select, p {
 }
 
 body {
-    background-image: url("/wwwroot/css/bg.jpg") background-size: cover;
+    background: url("/Image/image.jpeg") no-repeat center;
+    background-size: cover;
 }
 
 
-
-h1, h2 {
-    text-transform: uppercase;
-    font-weight: 400;
-}
 
 h2 {
+    text-transform: uppercase;
+    font-weight: 400;
     margin: 0 0 0 8px;
 }
 
@@ -34,8 +32,7 @@ h2 {
     align-items: center;
     height: 100%;
     padding: 25px;
-    background: -webkit-linear-gradient(left, #25c481, #25b7c4);
-    background: linear-gradient(to right, #113161d1, #25b7c4);
+    background: #113161d1;
 }
 
 .left-part, form {
@@ -139,3 +136,5 @@ button {
         height: auto;
     }
 }
+
+
