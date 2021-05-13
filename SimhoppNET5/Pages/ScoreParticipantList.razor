@@ -3,6 +3,7 @@
 @*@inject IParticipantsService ParticipantsService*@
 @inject IScoreServices ScoreService
 @inject IParticipantsService ParticipantService
+@inject ICompetitionServices CompetitionService
 @attribute [Authorize(Roles = "Admin, Judge1, Judge2, Judge3")]
 
 @if (scores == null)
@@ -13,16 +14,27 @@
 
 else
 {
- <!DOCTYPE html>
- <html>
+
+
     <head>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
         <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
     </head>
-    <body>
-        <section>
-            <h1>Scoring List</h1>
+    <body >
+        <section class="custom">
+            @if (status.Value_==3)
+            {
+                <h1>Quarter Finals</h1>
+            }
+            @if (status.Value_ == 4)
+            {
+                <h1>Semi Finals</h1>
+            }
+            @if (status.Value_ == 5)
+            {
+                <h1>Finals</h1>
+            }
             <div class="tbl-header">
                 <table cellpadding="0" cellspacing="0" border="0">
                     <thead>
@@ -35,7 +47,8 @@ else
                             <th>Judge 2</th>
                             <th>Judge 3</th>
                             <th>Difficulty </th>
-                            <th>Total </th>
+                            <th>Dive_Total </th>
+                            <th>Final_Total </th>
                         </tr>
                     </thead>
                 </table>
@@ -47,25 +60,45 @@ else
                         {
                             @foreach (var participant in participants)
                             {
-                                if (score.Score_ID == participant.ID)
+                                if (score.SCID == participant.ID)
                                 {
                                     <tr>
                                         <td>
-                                            <a href="ParticipantsScoreAdd/@score.Score_ID">
+                                            <a href="ParticipantsScoreAdd/@score.SCID">
                                                 <SfButton Content="Add Score" CssClass="e-primary"></SfButton>
                                             </a>
                                         </td>
-                                        <td>@score.Score_ID</td>
+                                        <td>@score.SCID</td>
                                         <td>@participant.FirstName</td>
                                         <td>@participant.LastName</td>
-                                        <td>@score.Judge1_result </td>
-                                        <td>@score.Judge2_result </td>
-                                        <td>@score.Judge3_result </td>
-                                        <td>@score.Difficulty </td>
-                                        <td>@score.Total_results </td>
+                                        @if(status.Value_==3)
+                                        {
+                                            <td>@score.Dive1_Judge1_result </td>
+                                            <td>@score.Dive1_Judge2_result </td>
+                                            <td>@score.Dive1_Judge3_result </td>
+                                            <td>@score.Dive1_Difficulty </td>
+                                            <td>@score.Dive1_Total_results </td>
 
+                                        }
+                                        @if(status.Value_==4)
+                                        {
+                                            <td>@score.Dive2_Judge1_result </td>
+                                            <td>@score.Dive2_Judge2_result </td>
+                                            <td>@score.Dive2_Judge3_result </td>
+                                            <td>@score.Dive2_Difficulty </td>
+                                            <td>@score.Dive2_Total_results </td>
 
+                                        }
+                                        @if(status.Value_==5)
+                                        {
+                                            <td>@score.Dive3_Judge1_result </td>
+                                            <td>@score.Dive3_Judge2_result </td>
+                                            <td>@score.Dive3_Judge3_result </td>
+                                            <td>@score.Dive3_Difficulty </td>
+                                            <td>@score.Dive3_Total_results </td>
 
+                                        }
+                                        <td>@score.Final_Total </td>
                                     </tr>
 
                                 }
@@ -76,19 +109,24 @@ else
                     </tbody>
                 </table>
             </div>
+
         </section>
     </body>
-</html>
+
 }
 
 
 @code {
     //IEnumerable<Participants> participants;
+    CompetitionStatus status = new CompetitionStatus();
     IEnumerable<Scores> scores;
     IEnumerable<Participants> participants;
 
+
+
     protected override async Task OnInitializedAsync()
     {
+        status = await CompetitionService.GetStatus();
         scores = await ScoreService.ScoreList();
         participants = await ParticipantService.ParticipantsList();
     }

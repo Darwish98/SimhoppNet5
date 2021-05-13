@@ -1,8 +1,8 @@
 ﻿@using SimhoppNET5.Data
 @using System
-
-@page "/ParticipantsScoreAdd/{Score_ID:int}"
+@page "/ParticipantsScoreAdd/{SCID:int}"
 @inject IScoreServices ScoreService
+@inject ICompetitionServices CompetitionService
 @inject NavigationManager NavigationManager
 
 <!DOCTYPE html>
@@ -12,25 +12,77 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
 </head>
 <body>
-    <div class="main-block">
-        <EditForm Model="@score" OnValidSubmit="@ScoreSave" Context="Editform">
+    <div class="main-block custom">
+        <EditForm Model="@scores" OnValidSubmit="@ScoreSave" Context="Editform">
             <div class="title">
                 <i class="fas fa-pencil-alt"></i>
                 <h2>Update Score</h2>
             </div>
-            <div class="info">
-                <AuthorizeView Roles="Judge1, Admin" Context="Auth1">
-                    <input class="fname" type="number" @bind="score.Difficulty" name="name" placeholder="Difficulty" min="0" max="10" required>
-                    <input class="fname" type="number" @bind="score.Judge1_result" name="name" placeholder="Judge1_result"  min="0" max="10" required>
-                </AuthorizeView>
-                <AuthorizeView Roles="Judge2 , Admin">
-                    <input class="fname" type="number" @bind="score.Judge2_result" name="name" placeholder="Judge2_result"  min="0" max="10" required>
-                </AuthorizeView>
-                <AuthorizeView Roles="Judge3, Admin">
-                    <input class="fname" type="number" @bind="score.Judge3_result" name="name" placeholder="Judge3_result" min="0" max="10" required>
-                </AuthorizeView>
+             @if (status.Value_ == 3)
+             {
 
-            </div>
+
+                <div class="info">
+                    <AuthorizeView Roles="Judge1, Admin" Context="Auth1">
+                        <label>Difficulty</label>
+                        <input class="fname" type="number" @bind="scores.Dive1_Difficulty" name="name" min="0" max="10" required>
+                        <label>Judge1_result</label>
+                        <input class="fname" type="number" @bind="scores.Dive1_Judge1_result" name="name" min="0" max="10" required>
+                    </AuthorizeView>
+                    <AuthorizeView Roles="Judge2 , Admin">
+                        <label>Judge2_result</label>
+                        <input class="fname" type="number" @bind="scores.Dive1_Judge2_result" name="name" min="0" max="10" required>
+                    </AuthorizeView>
+                    <AuthorizeView Roles="Judge3, Admin">
+                        <label>Judge3_result</label>
+                        <input class="fname" type="number" @bind="scores.Dive1_Judge3_result" name="name" min="0" max="10" required>
+                    </AuthorizeView>
+
+                </div>
+             }
+
+            @if (status.Value_ == 4)
+            {
+
+                <div class="info">
+                    <AuthorizeView Roles="Judge1, Admin" Context="Auth2">
+                        <label>Difficulty</label>
+                        <input class="fname" type="number" @bind="scores.Dive2_Difficulty" name="name" min="0" max="10" required>
+                        <label>Judge1_result</label>
+                        <input class="fname" type="number" @bind="scores.Dive2_Judge1_result" name="name" min="0" max="10" required>
+                    </AuthorizeView>
+                    <AuthorizeView Roles="Judge2 , Admin">
+                        <label>Judge2_result</label>
+                        <input class="fname" type="number" @bind="scores.Dive2_Judge2_result" name="name" min="0" max="10" required>
+                    </AuthorizeView>
+                    <AuthorizeView Roles="Judge3, Admin">
+                        <label>Judge3_result</label>
+                        <input class="fname" type="number" @bind="scores.Dive2_Judge3_result" name="name" min="0" max="10" required>
+                    </AuthorizeView>
+
+                </div>
+            }
+            @if (status.Value_ == 5)
+            {
+
+                <div class="info">
+                    <AuthorizeView Roles="Judge1, Admin" Context="Auth3">
+                        <label>Difficulty</label>
+                        <input class="fname" type="number" @bind="scores.Dive3_Difficulty" name="name" min="0" max="10" required>
+                        <label>Judge1_result</label>
+                        <input class="fname" type="number" @bind="scores.Dive3_Judge1_result" name="name" min="0" max="10" required>
+                    </AuthorizeView>
+                    <AuthorizeView Roles="Judge2 , Admin">
+                        <label>Judge2_result</label>
+                        <input class="fname" type="number" @bind="scores.Dive3_Judge2_result" name="name" min="0" max="10" required>
+                    </AuthorizeView>
+                    <AuthorizeView Roles="Judge3, Admin">
+                        <label>Judge3_result</label>
+                        <input class="fname" type="number" @bind="scores.Dive3_Judge3_result" name="name" min="0" max="10" required>
+                    </AuthorizeView>
+
+                </div>
+            }
             <button type="submit">Update</button>
             <button @onclick="@Cancel">Cancel</button>
         </EditForm>
@@ -48,80 +100,63 @@
 </html>
 
 
-@*
-<EditForm Model="@score" OnValidSubmit="@ScoreSave" Context="Editform">
-    <table class="editform">
-        <AuthorizeView Roles="Judge1, Admin" Context="Auth1">
-            <tr>
-                <td>Difficulty</td>
-                <td><input type="text" @bind="score.Difficulty" required /></td>
-            </tr>
-            <tr>
-                <td>Judge1</td>
-                <td><input type="text" placeholder="Value between 0-10" @bind="score.Judge1_result" required /></td>
-            </tr>
-
-        </AuthorizeView>
-        <AuthorizeView Roles="Judge2 , Admin">
-            <tr>
-                <td>Judge2:</td>
-                <td><input type="text" placeholder="Value between 0-10" @bind="score.Judge2_result" required /></td>
-            </tr>
-        </AuthorizeView>
-        <AuthorizeView Roles="Judge3, Admin">
-            <tr>
-                <td>Judge3</td>
-                <td><input type="text" placeholder="Value between 0-10" @bind="score.Judge3_result" required /></td>
-            </tr>
-        </AuthorizeView>
-
-
-        <tr>
-            <td colspan="2" style="text-align:center">
-                <input type="submit" value="score" @onclick="@ScoreSave" />
-                <input type="button" value="Cancel" @onclick="@Cancel2" />
-            </td>
-
-        </tr>
-    </table>
-
-
-</EditForm>*@
-
-
-
-
 @code {
 
-    Scores score = new Scores();
+
+    Scores scores = new Scores();
 
     [Parameter]
-    public int Score_ID { get; set; }
-    //set default page title and button text
+    public int SCID { get; set; }
+
+    CompetitionStatus status = new CompetitionStatus();
 
     protected override async Task OnInitializedAsync()
     {
-
-        score = await ScoreService.Score_GetOne(Score_ID);
+        scores = await ScoreService.Score_GetOne(SCID);
+        status = await CompetitionService.GetStatus();
 
     }
 
     protected async Task ScoreSave()
     {
-        if (score.Score_ID == 0)
+        if (scores.SCID == 0)
         {
-            float[] score_list = { score.Judge1_result, score.Judge2_result, score.Judge3_result };
+            float[] score_list = { scores.Dive1_Judge1_result, scores.Dive1_Judge2_result, scores.Dive1_Judge3_result };
             Array.Sort(score_list);
-            score.Total_results = score_list[1] * 3 * score.Difficulty;
-            await ScoreService.ScoreUpdate(score);
+            scores.Dive1_Total_results = score_list[1] * 3 * scores.Dive1_Difficulty;
+
+            float[] score_list2 = { scores.Dive2_Judge1_result, scores.Dive2_Judge2_result, scores.Dive2_Judge3_result };
+            Array.Sort(score_list);
+            scores.Dive2_Total_results = score_list[1] * 3 * scores.Dive2_Difficulty;
+
+            float[] score_list3 = { scores.Dive3_Judge1_result, scores.Dive3_Judge2_result, scores.Dive3_Judge3_result };
+            Array.Sort(score_list);
+            scores.Dive3_Total_results = score_list[1] * 3 * scores.Dive3_Difficulty;
+
+            scores.Final_Total = scores.Dive1_Total_results + scores.Dive2_Total_results + scores.Dive3_Total_results;
+
+
+            await ScoreService.ScoreUpdate(scores);
         }
         else
         {
 
-            float[] score_list = { score.Judge1_result, score.Judge2_result, score.Judge3_result };
+            float[] score_list = { scores.Dive1_Judge1_result, scores.Dive1_Judge2_result, scores.Dive1_Judge3_result };
             Array.Sort(score_list);
-            score.Total_results = score_list[1] * 3 * score.Difficulty;
-            await ScoreService.ScoreUpdate(score);
+            scores.Dive1_Total_results = score_list[1] * 3 * scores.Dive1_Difficulty;
+
+            float[] score_list2 = { scores.Dive2_Judge1_result, scores.Dive2_Judge2_result, scores.Dive2_Judge3_result };
+            Array.Sort(score_list);
+            scores.Dive2_Total_results = score_list[1] * 3 * scores.Dive2_Difficulty;
+
+            float[] score_list3 = { scores.Dive3_Judge1_result, scores.Dive3_Judge2_result, scores.Dive3_Judge3_result };
+            Array.Sort(score_list);
+            scores.Dive3_Total_results = score_list[1] * 3 * scores.Dive3_Difficulty;
+
+            scores.Final_Total = scores.Dive1_Total_results + scores.Dive2_Total_results + scores.Dive3_Total_results;
+
+
+            await ScoreService.ScoreUpdate(scores);
 
         }
         NavigationManager.NavigateTo("/ParticipantsScore");
@@ -131,3 +166,35 @@
         NavigationManager.NavigateTo("/ParticipantsScore");
     }
 }
+
+
+
+
+@*
+    @code {
+
+        Scores score = new Scores();
+
+        [Parameter]
+        public int SCID { get; set; }
+        //set default page title and button text
+
+        protected override async Task OnInitializedAsync()
+        {
+
+            score = await ScoreService.Score_GetOne(SCID);
+         
+
+        }
+
+        protected async Task ScoreSave()
+        {
+            score.Dive1_Total_results = 3;
+            await ScoreService.ScoreUpdate(score);
+            NavigationManager.NavigateTo("/ParticipantsScore");
+        }
+        void Cancel()
+        {
+            NavigationManager.NavigateTo("/ParticipantsScore");
+        }
+    }*@

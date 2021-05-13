@@ -33,14 +33,18 @@ namespace SimhoppNET5.Data
                 parameters.Add("Age", participants.Age, DbType.Int32);
                 parameters.Add("EmailAddress", participants.EmailAddress, DbType.String);
                 parameters.Add("club", participants.club, DbType.String);
-                parameters.Add("Dive_Group", participants.Dive_Group, DbType.String);
-                parameters.Add("Dive_position", participants.Dive_position, DbType.String);
-                parameters.Add("Init_position", participants.Init_position, DbType.String);
-                parameters.Add("half_somersaults", participants.half_somersaults, DbType.String);
-
-
-
-
+                parameters.Add("Dive1_Dive_Group", participants.Dive1_Dive_Group, DbType.String);
+                parameters.Add("Dive1_Dive_position", participants.Dive1_Dive_position, DbType.String);
+                parameters.Add("Dive1_Init_position", participants.Dive1_Init_position, DbType.String);
+                parameters.Add("Dive1_half_somersaults", participants.Dive1_half_somersaults, DbType.String);
+                parameters.Add("Dive2_Dive_Group", participants.Dive2_Dive_Group, DbType.String);
+                parameters.Add("Dive2_Dive_position", participants.Dive2_Dive_position, DbType.String);
+                parameters.Add("Dive2_Init_position", participants.Dive2_Init_position, DbType.String);
+                parameters.Add("Dive2_half_somersaults", participants.Dive2_half_somersaults, DbType.String);
+                parameters.Add("Dive3_Dive_Group", participants.Dive3_Dive_Group, DbType.String);
+                parameters.Add("Dive3_Dive_position", participants.Dive3_Dive_position, DbType.String);
+                parameters.Add("Dive3_Init_position", participants.Dive3_Init_position, DbType.String);
+                parameters.Add("Dive3_half_somersaults", participants.Dive3_half_somersaults, DbType.String);
 
                 //Using stored procedure to avoid sql command inside the code
 
@@ -136,10 +140,18 @@ namespace SimhoppNET5.Data
                 parameters.Add("Age", participants.Age, DbType.Int32);
                 parameters.Add("EmailAddress", participants.EmailAddress, DbType.String);
                 parameters.Add("club", participants.club, DbType.String);
-                parameters.Add("Dive_Group", participants.Dive_Group, DbType.String);
-                parameters.Add("Dive_position", participants.Dive_position, DbType.String);
-                parameters.Add("Init_position", participants.Init_position, DbType.String);
-                parameters.Add("half_somersaults", participants.half_somersaults, DbType.String);
+                parameters.Add("Dive1_Dive_Group", participants.Dive1_Dive_Group, DbType.String);
+                parameters.Add("Dive1_Dive_position", participants.Dive1_Dive_position, DbType.String);
+                parameters.Add("Dive1_Init_position", participants.Dive1_Init_position, DbType.String);
+                parameters.Add("Dive1_half_somersaults", participants.Dive1_half_somersaults, DbType.String);
+                parameters.Add("Dive2_Dive_Group", participants.Dive2_Dive_Group, DbType.String);
+                parameters.Add("Dive2_Dive_position", participants.Dive2_Dive_position, DbType.String);
+                parameters.Add("Dive2_Init_position", participants.Dive2_Init_position, DbType.String);
+                parameters.Add("Dive2_half_somersaults", participants.Dive2_half_somersaults, DbType.String);
+                parameters.Add("Dive3_Dive_Group", participants.Dive3_Dive_Group, DbType.String);
+                parameters.Add("Dive3_Dive_position", participants.Dive3_Dive_position, DbType.String);
+                parameters.Add("Dive3_Init_position", participants.Dive3_Init_position, DbType.String);
+                parameters.Add("Dive3_half_somersaults", participants.Dive3_half_somersaults, DbType.String);
 
 
                 //Using stored procedure to avoid sql command inside the code

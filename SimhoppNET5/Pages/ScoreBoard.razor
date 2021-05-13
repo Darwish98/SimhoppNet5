@@ -4,9 +4,27 @@
 @inject NavigationManager NavigationManager
 @page "/Scoreboard"
 @inject IParticipantsService ParticipantsService
+@inject ICompetitionServices CompetitionService
 
 
-@if (participants32 == null)
+@if (status.Value_ == 3)
+{
+    Current = participants32;
+}
+@if (status.Value_ == 4)
+{
+    Current = participants16;
+}
+@if (status.Value_ == 5)
+{
+    Current = participants8;
+}
+@if (status.Value_ == 6)
+{
+    Current = participants3;
+}
+
+@if (Current == null)
 {
     <img src="/css/VAyR.gif" />
 
@@ -21,10 +39,24 @@ else
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
     </head>
     <body>
-
-        <section>
+        <section class="custom">
             <!--for demo wrap-->
-            <h1>Live Scoreboard</h1>
+            @if (status.Value_ == 3)
+            {
+                <h1>Quarter Finals Live Scoreboard</h1>
+            }
+            @if (status.Value_ == 4)
+            {
+                <h1>Semi Finals Live Scoreboard</h1>
+            }
+            @if (status.Value_ == 5)
+            {
+                <h1>Finals Live Scoreboard</h1>
+            }
+            @if (status.Value_ == 6)
+            {
+                <h1>Winners</h1>
+            }
             <div class="tbl-header">
                 <table cellpadding="0" cellspacing="0" border="0">
                     <thead>
@@ -40,7 +72,7 @@ else
             <div class="tbl-content">
                 <table cellpadding="0" cellspacing="0" border="0">
                     <tbody>
-                        @foreach (var participant in participants32)
+                        @foreach (var participant in Current)
                         {
                             <tr>
                                 <td>@participant.FirstName</td>
@@ -56,52 +88,28 @@ else
             </div>
         </section>
 
-
-        @*<body>
-        <div class="title">
-            <i class="fas fa-pencil-alt"></i>
-            <h2>Live ScoreBoard</h2>
-        </div>
-        <div class="main-block">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Club</th>
-                        <th>Total Score</th>
-
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var participant in participants32)
-                    {
-                        <tr>
-                            <td>@participant.FirstName</td>
-                            <td>@participant.LastName</td>
-                            <td>@participant.club</td>
-                            <td>@participant.Total_results</td>
-
-                        </tr>
-
-                    }
-                </tbody>
-            </table>
-        </div>
-        }*@
     </body>
 </html>
-                
+
 }
 
 @code {
 
     IEnumerable<Participants> participants32;
+    IEnumerable<Participants> participants16;
+    IEnumerable<Participants> participants8;
+    IEnumerable<Participants> participants3;
+    IEnumerable<Participants> Current;
 
+
+    CompetitionStatus status = new CompetitionStatus();
     protected override async Task OnInitializedAsync()
     {
-
+        status = await CompetitionService.GetStatus();
         participants32 = await ParticipantsService.Top32();
+        participants16 = await ParticipantsService.Top16();
+        participants8 = await ParticipantsService.Top8();
+        participants3 = await ParticipantsService.Top3();
     }
 
 }

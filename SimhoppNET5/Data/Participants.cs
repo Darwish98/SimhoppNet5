@@ -15,10 +15,18 @@ namespace SimhoppNET5.Data
         public string club { get; set; }
         public string Diving_ID{ get; set; }
         public float Total_results { get; set; }
-        public string Dive_Group { get; set; }
-        public string Dive_position { get; set; }
-        public string Init_position { get; set; }
-        public string half_somersaults { get; set; }
+        public string Dive1_Dive_Group { get; set; }
+        public string Dive1_Dive_position { get; set; }
+        public string Dive1_Init_position { get; set; }
+        public string Dive1_half_somersaults { get; set; }
+        public string Dive2_Dive_Group { get; set; }
+        public string Dive2_Dive_position { get; set; }
+        public string Dive2_Init_position { get; set; }
+        public string Dive2_half_somersaults { get; set; }
+        public string Dive3_Dive_Group { get; set; }
+        public string Dive3_Dive_position { get; set; }
+        public string Dive3_Init_position { get; set; }
+        public string Dive3_half_somersaults { get; set; }
 
     }
 }

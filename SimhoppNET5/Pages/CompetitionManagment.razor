@@ -1,0 +1,72 @@
+﻿@using SimhoppNET5.Data
+@using Syncfusion.Blazor.DropDowns
+@using Newtonsoft.Json
+
+@page "/CompetitionManagament"
+@inject ICompetitionServices  CompetitionService
+@inject NavigationManager NavigationManager
+@attribute [Authorize(Roles = "Admin")]
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+</head>
+<body>
+    <div  class="main-block custom">
+        <EditForm Model="@status" OnValidSubmit="@UpdateCompetitionStatus">
+            <div class="title">
+                <i class="fas fa-pencil-alt"></i>
+                <h2>Update Competition Status</h2>
+            </div>
+            <div class="info">
+                
+                <select @bind="status.Value_" required>
+                    <option value="0" selected>Inactive</option>
+                    <option value="1"> Open register form</option>
+                    <option value="2"> Close register form</option>
+                    <option value="3"> Start Quarter-Finals</option>
+                    <option value="4"> Start Semi-Finals</option>
+                    <option value="5"> Start Finals</option>
+                    <option value="6"> Announce winners </option>
+                </select>
+            </div>
+            <button type="submit">Update</button>
+        </EditForm>
+        <div class="left-part">
+            <i class="fas fa-graduation-cap"></i>
+            <h1>Diving News</h1>
+            <p>Click on the button latest diving sport news </p>
+            <div class="btn-group">
+                <a class="btn-item" href="https://olympics.com/en/sports/diving/">Olympics</a>
+                <a class="btn-item" href="https://www.svensksimidrott.se/varasimidrotter/Simhopp/Nyheter">Simhopp</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+
+@code {
+    // Create a new, empty Video object
+    CompetitionStatus status = new CompetitionStatus();
+
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        status = await CompetitionService.GetStatus();
+    }
+
+    protected async Task UpdateCompetitionStatus()
+    {
+        await CompetitionService.StatusUpdate(status);
+
+        NavigationManager.NavigateTo("/ScoreBoard");
+    }
+    void Cancel()
+    {
+        NavigationManager.NavigateTo("/ScoreBoard");
+    }
+}

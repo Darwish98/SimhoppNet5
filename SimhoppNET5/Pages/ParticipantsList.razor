@@ -6,7 +6,7 @@
 
 @if (participants == null)
 {
-    <img src="/css/VAyR.gif"/>
+    <img src="/css/VAyR.gif" />
 }
 else
 {
@@ -19,9 +19,9 @@ else
     </head>
     <body>
 
-        <section>
+        <section class="custom">
             <!--for demo wrap-->
-            <h1>Participants List</h1>
+            <h1>Participants List </h1>
             <div class="tbl-header">
                 <table cellpadding="0" cellspacing="0" border="0">
                     <thead>
@@ -59,6 +59,7 @@ else
 
                             </tr>
                         }
+
                     </tbody>
                 </table>
             </div>
@@ -71,8 +72,13 @@ else
 @code {
     IEnumerable<Participants> participants;
 
+ 
+
     protected override async Task OnInitializedAsync()
     {
+
         participants = await ParticipantsService.ParticipantsList();
     }
+
+
 }

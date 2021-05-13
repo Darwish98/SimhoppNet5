@@ -7,6 +7,9 @@
 .main {
     flex: 1;
 }
+body {
+    background-size: cover;
+}
 
 .sidebar {
     background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #0478a1 70%);

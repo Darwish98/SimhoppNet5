@@ -45,6 +45,7 @@ namespace SimhoppNET5
             services.AddDatabaseDeveloperPageExceptionFilter();
             services.AddScoped<IParticipantsService, ParticipantsService>();
             services.AddScoped<IScoreServices, ScoreServices>();
+            services.AddScoped<ICompetitionServices, CompetitionServices>();
             services.AddResponseCompression(opts =>
             {
                 opts.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(

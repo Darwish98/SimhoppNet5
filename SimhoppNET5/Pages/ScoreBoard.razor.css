@@ -1,9 +1,9 @@
-﻿html, body {
+﻿html,body{
     min-height: 100%;
-    background-image: url("/wwwroot/css/bg.jpg")
+    
 }
 
-body, div, form, input, select, p {
+body,div, form, input, select, p {
     padding: 0;
     margin: 0;
     outline: none;
@@ -12,10 +12,6 @@ body, div, form, input, select, p {
     color: #eee;
 }
 
-body {
-    background: url("/Image/image.jpeg") no-repeat center;
-    background-size: cover;
-}
 
 
 
@@ -186,7 +182,7 @@ td {
 
 /* demo styles */
 
-body {
+.custom{
     background: -webkit-linear-gradient(left, #25c481, #25b7c4);
     background: linear-gradient(to right, #113161d1, #25b7c4);
     font-family: 'Roboto', sans-serif;
