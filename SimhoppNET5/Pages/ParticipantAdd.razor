@@ -155,12 +155,12 @@
         participants.Dive2_Init_position = "0";
         participants.Dive3_Init_position = "0";
         await ParticipantsService.ParticipantsInsert(participants);
-        NavigationManager.NavigateTo("/");
+        NavigationManager.NavigateTo("/ScoreBoard");
 
     }
 
     void Cancel()
     {
-        NavigationManager.NavigateTo("/");
+        NavigationManager.NavigateTo("/ScoreBoard");
     }
 }

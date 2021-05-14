@@ -8,7 +8,7 @@
 
 @if (scores == null)
 {
-    <img src="/css/VAyR.gif" />
+    <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
 
 }
 
@@ -21,9 +21,9 @@ else
         <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
     </head>
-    <body >
+    <body>
         <section class="custom">
-            @if (status.Value_==3)
+            @if (status.Value_ == 3)
             {
                 <h1>Quarter Finals</h1>
             }
@@ -71,7 +71,7 @@ else
                                         <td>@score.SCID</td>
                                         <td>@participant.FirstName</td>
                                         <td>@participant.LastName</td>
-                                        @if(status.Value_==3)
+                                        @if (status.Value_ == 3)
                                         {
                                             <td>@score.Dive1_Judge1_result </td>
                                             <td>@score.Dive1_Judge2_result </td>
@@ -80,7 +80,7 @@ else
                                             <td>@score.Dive1_Total_results </td>
 
                                         }
-                                        @if(status.Value_==4)
+                                        @if (status.Value_ == 4)
                                         {
                                             <td>@score.Dive2_Judge1_result </td>
                                             <td>@score.Dive2_Judge2_result </td>
@@ -89,7 +89,7 @@ else
                                             <td>@score.Dive2_Total_results </td>
 
                                         }
-                                        @if(status.Value_==5)
+                                        @if (status.Value_ == 5)
                                         {
                                             <td>@score.Dive3_Judge1_result </td>
                                             <td>@score.Dive3_Judge2_result </td>
@@ -112,6 +112,7 @@ else
 
         </section>
     </body>
+    
 
 }
 
