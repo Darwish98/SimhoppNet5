@@ -13,8 +13,6 @@ namespace SimhoppNET5.Data
         public int ID { get; set; }
         public string EmailAddress { get; set; }
         public string club { get; set; }
-        public string Diving_ID{ get; set; }
-        public float Total_results { get; set; }
         public string Dive1_Dive_Group { get; set; }
         public string Dive1_Dive_position { get; set; }
         public string Dive1_Init_position { get; set; }

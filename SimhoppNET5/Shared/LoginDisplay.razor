@@ -1,12 +1,14 @@
 ﻿<AuthorizeView>
     <Authorized>
         <a href="Identity/Account/Manage">Hello, @context.User.Identity.Name!</a>
+        <AuthorizeView Roles="Admin" Context="AuthAdmin">
+            <a href="Identity/Account/Register">Register a Judge</a>
+        </AuthorizeView>
         <form method="post" action="Identity/Account/LogOut">
             <button type="submit" class="nav-link btn btn-link">Log out</button>
         </form>
     </Authorized>
     <NotAuthorized>
-        @*<a href="Identity/Account/Register">Register</a>*@
         <a href="Identity/Account/Login">
             <SfButton Content="Log in" CssClass="e-primary"></SfButton>
         </a>
