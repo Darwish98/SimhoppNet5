@@ -3,154 +3,164 @@
 @using Newtonsoft.Json
 @page "/ParticipantAdd"
 @inject IParticipantsService ParticipantsService
+@inject ICompetitionServices CompetitionService
 @inject NavigationManager NavigationManager
 
-<!DOCTYPE html>
-<html>
-<head>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
-</head>
-<body>
-    <div class="main-block">
-        <EditForm Model="@participants" OnValidSubmit="@ParticipantsInsert">
-            <div class="title">
-                <i class="fas fa-pencil-alt"></i>
-                <h2>Regsiter as a participant</h2>
-            </div>
-            <div class="info">
-                <label>First Name</label>
-                <input class="fname" type="text" @bind="participants.FirstName" name="name" required>
-                <label>Last Name</label>
-                <input class="fname" type="text" @bind="participants.LastName" name="name" required>
-                <label>Age</label>
-                <input class="fname" type="number" @bind="participants.Age" name="name" min=0 max=50 required>
-                <label>Club</label>
-                <input class="fname" type="text" @bind="participants.club" name="name" required>
-                <label>E-mail</label>
-                <input class="fname" type="text" @bind="participants.EmailAddress" name="name" required>
-                <label>______________________________________</label>
-                <label>Dive 1: Quarter Finals</label>
-                <label>______________________________________</label>
-                <label>Dive Group</label>
-                <select @bind="participants.Dive1_Dive_Group" required>
-                    <option value="Forward Dive" selected>1- Forward Dive</option>
-                    <option value="Backward Dive">2- Backward Dive</option>
-                    <option value="Reverse Dive">3- Reverse Dive</option>
-                    <option value="Inward Dive">4- Inward Dive</option>
-                    <option value="Twisting Dive">5- Twisting Dive</option>
-                    <option value="Armstand Dive">6- Armstand Dive</option>
-                </select>
-                <label>Dive position</label>
-                <select @bind="participants.Dive1_Dive_position" required>
-                    <option value="Straight Position" selected>A- Straight Position</option>
-                    <option value="Pike Position">B- Pike Position</option>
-                    <option value="Tuck Position">C- Tuck Position</option>
-                    <option value="Free Position">D- Free Position</option>
-                </select>
-                <label>Number of half somersaults</label>
-                <select @bind="participants.Dive1_half_somersaults" required>
-                    <option value="0" selected>0 half somersaults</option>
-                    <option value="1">1 half somersaults</option>
-                    <option value="2">2 half somersaults</option>
-                    <option value="3">3 half somersaults</option>
-                    <option value="4">4 half somersaults</option>
-                    <option value="5">5 half somersaults</option>
-                    <option value="6">6 half somersaults</option>
-                    <option value="7">7 half somersaults</option>
-                    <option value="8">8 half somersaults</option>
-                    <option value="9">9 half somersaults</option>
-                </select>
-                <label>______________________________________</label>
-                <label>Dive 2: Semi Finals</label>
-                <label>______________________________________</label>
-                <label>Dive Group</label>
-                <select @bind="participants.Dive2_Dive_Group" required>
-                    <option value="Forward Dive" selected>1- Forward Dive</option>
-                    <option value="Backward Dive">2- Backward Dive</option>
-                    <option value="Reverse Dive">3- Reverse Dive</option>
-                    <option value="Inward Dive">4- Inward Dive</option>
-                    <option value="Twisting Dive">5- Twisting Dive</option>
-                    <option value="Armstand Dive">6- Armstand Dive</option>
-                </select>
-                <label>Dive position</label>
-                <select @bind="participants.Dive2_Dive_position" required>
-                    <option value="Straight Position" selected>A- Straight Position</option>
-                    <option value="Pike Position">B- Pike Position</option>
-                    <option value="Tuck Position">C- Tuck Position</option>
-                    <option value="Free Position">D- Free Position</option>
-                </select>
-                <label>Number of half somersaults</label>
-                <select @bind="participants.Dive2_half_somersaults" required>
-                    <option value="0" selected>0 half somersaults</option>
-                    <option value="1">1 half somersaults</option>
-                    <option value="2">2 half somersaults</option>
-                    <option value="3">3 half somersaults</option>
-                    <option value="4">4 half somersaults</option>
-                    <option value="5">5 half somersaults</option>
-                    <option value="6">6 half somersaults</option>
-                    <option value="7">7 half somersaults</option>
-                    <option value="8">8 half somersaults</option>
-                    <option value="9">9 half somersaults</option>
-                </select>
-                <label>______________________________________</label>
-                <label>Dive 3: Finals</label>
-                <label>______________________________________</label>
-                <select @bind="participants.Dive3_Dive_Group" required>
-                    <option value="Forward Dive" selected>1- Forward Dive</option>
-                    <option value="Backward Dive">2- Backward Dive</option>
-                    <option value="Reverse Dive">3- Reverse Dive</option>
-                    <option value="Inward Dive">4- Inward Dive</option>
-                    <option value="Twisting Dive">5- Twisting Dive</option>
-                    <option value="Armstand Dive">6- Armstand Dive</option>
-                </select>
-                <label>Dive position</label>
-                <select @bind="participants.Dive3_Dive_position" required>
-                    <option value="Straight Position" selected>A- Straight Position</option>
-                    <option value="Pike Position">B- Pike Position</option>
-                    <option value="Tuck Position">C- Tuck Position</option>
-                    <option value="Free Position">D- Free Position</option>
-                </select>
-                <label>Number of half somersaults</label>
-                <select @bind="participants.Dive3_half_somersaults" required>
-                    <option value="0" selected>0 half somersaults</option>
-                    <option value="1">1 half somersaults</option>
-                    <option value="2">2 half somersaults</option>
-                    <option value="3">3 half somersaults</option>
-                    <option value="4">4 half somersaults</option>
-                    <option value="5">5 half somersaults</option>
-                    <option value="6">6 half somersaults</option>
-                    <option value="7">7 half somersaults</option>
-                    <option value="8">8 half somersaults</option>
-                    <option value="9">9 half somersaults</option>
-                </select>
-            </div>
-            <div class="checkbox">
-                <input type="checkbox" name="checkbox"><span>I agree to the <a href="https://olympics.com/en/privacy-policy">Privacy Policy for Olympics.</a></span>
-            </div>
-            <button type="submit">Submit</button>
-        </EditForm>
-        <div class="left-part">
-            <i class="fas fa-graduation-cap"></i>
-            <h1>Diving News</h1>
-            <p>Click on the button latest diving sport news </p>
-            <div class="btn-group">
-                <a class="btn-item" href="https://olympics.com/en/sports/diving/">Olympics</a>
-                <a class="btn-item" href="https://www.svensksimidrott.se/varasimidrotter/Simhopp/Nyheter">Simhopp</a>
+@if (status.Value_ == 1)
+{
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+    </head>
+    <body>
+        <div class="main-block">
+            <EditForm Model="@participants" OnValidSubmit="@ParticipantsInsert">
+                <div class="title">
+                    <i class="fas fa-pencil-alt"></i>
+                    <h2>Regsiter as a participant</h2>
+                </div>
+                <div class="info">
+                    <label>First Name</label>
+                    <input class="fname" type="text" @bind="participants.FirstName" name="name" required>
+                    <label>Last Name</label>
+                    <input class="fname" type="text" @bind="participants.LastName" name="name" required>
+                    <label>Age</label>
+                    <input class="fname" type="number" @bind="participants.Age" name="name" min=0 max=50 required>
+                    <label>Club</label>
+                    <input class="fname" type="text" @bind="participants.club" name="name" required>
+                    <label>E-mail</label>
+                    <input class="fname" type="text" @bind="participants.EmailAddress" name="name" required>
+                    <label>______________________________________</label>
+                    <label>Dive 1: Quarter Finals</label>
+                    <label>______________________________________</label>
+                    <label>Dive Group</label>
+                    <select @bind="participants.Dive1_Dive_Group" required>
+                        <option value="Forward Dive" selected>1- Forward Dive</option>
+                        <option value="Backward Dive">2- Backward Dive</option>
+                        <option value="Reverse Dive">3- Reverse Dive</option>
+                        <option value="Inward Dive">4- Inward Dive</option>
+                        <option value="Twisting Dive">5- Twisting Dive</option>
+                        <option value="Armstand Dive">6- Armstand Dive</option>
+                    </select>
+                    <label>Dive position</label>
+                    <select @bind="participants.Dive1_Dive_position" required>
+                        <option value="Straight Position" selected>A- Straight Position</option>
+                        <option value="Pike Position">B- Pike Position</option>
+                        <option value="Tuck Position">C- Tuck Position</option>
+                        <option value="Free Position">D- Free Position</option>
+                    </select>
+                    <label>Number of half somersaults</label>
+                    <select @bind="participants.Dive1_half_somersaults" required>
+                        <option value="0" selected>0 half somersaults</option>
+                        <option value="1">1 half somersaults</option>
+                        <option value="2">2 half somersaults</option>
+                        <option value="3">3 half somersaults</option>
+                        <option value="4">4 half somersaults</option>
+                        <option value="5">5 half somersaults</option>
+                        <option value="6">6 half somersaults</option>
+                        <option value="7">7 half somersaults</option>
+                        <option value="8">8 half somersaults</option>
+                        <option value="9">9 half somersaults</option>
+                    </select>
+                    <label>______________________________________</label>
+                    <label>Dive 2: Semi Finals</label>
+                    <label>______________________________________</label>
+                    <label>Dive Group</label>
+                    <select @bind="participants.Dive2_Dive_Group" required>
+                        <option value="Forward Dive" selected>1- Forward Dive</option>
+                        <option value="Backward Dive">2- Backward Dive</option>
+                        <option value="Reverse Dive">3- Reverse Dive</option>
+                        <option value="Inward Dive">4- Inward Dive</option>
+                        <option value="Twisting Dive">5- Twisting Dive</option>
+                        <option value="Armstand Dive">6- Armstand Dive</option>
+                    </select>
+                    <label>Dive position</label>
+                    <select @bind="participants.Dive2_Dive_position" required>
+                        <option value="Straight Position" selected>A- Straight Position</option>
+                        <option value="Pike Position">B- Pike Position</option>
+                        <option value="Tuck Position">C- Tuck Position</option>
+                        <option value="Free Position">D- Free Position</option>
+                    </select>
+                    <label>Number of half somersaults</label>
+                    <select @bind="participants.Dive2_half_somersaults" required>
+                        <option value="0" selected>0 half somersaults</option>
+                        <option value="1">1 half somersaults</option>
+                        <option value="2">2 half somersaults</option>
+                        <option value="3">3 half somersaults</option>
+                        <option value="4">4 half somersaults</option>
+                        <option value="5">5 half somersaults</option>
+                        <option value="6">6 half somersaults</option>
+                        <option value="7">7 half somersaults</option>
+                        <option value="8">8 half somersaults</option>
+                        <option value="9">9 half somersaults</option>
+                    </select>
+                    <label>______________________________________</label>
+                    <label>Dive 3: Finals</label>
+                    <label>______________________________________</label>
+                    <select @bind="participants.Dive3_Dive_Group" required>
+                        <option value="Forward Dive" selected>1- Forward Dive</option>
+                        <option value="Backward Dive">2- Backward Dive</option>
+                        <option value="Reverse Dive">3- Reverse Dive</option>
+                        <option value="Inward Dive">4- Inward Dive</option>
+                        <option value="Twisting Dive">5- Twisting Dive</option>
+                        <option value="Armstand Dive">6- Armstand Dive</option>
+                    </select>
+                    <label>Dive position</label>
+                    <select @bind="participants.Dive3_Dive_position" required>
+                        <option value="Straight Position" selected>A- Straight Position</option>
+                        <option value="Pike Position">B- Pike Position</option>
+                        <option value="Tuck Position">C- Tuck Position</option>
+                        <option value="Free Position">D- Free Position</option>
+                    </select>
+                    <label>Number of half somersaults</label>
+                    <select @bind="participants.Dive3_half_somersaults" required>
+                        <option value="0" selected>0 half somersaults</option>
+                        <option value="1">1 half somersaults</option>
+                        <option value="2">2 half somersaults</option>
+                        <option value="3">3 half somersaults</option>
+                        <option value="4">4 half somersaults</option>
+                        <option value="5">5 half somersaults</option>
+                        <option value="6">6 half somersaults</option>
+                        <option value="7">7 half somersaults</option>
+                        <option value="8">8 half somersaults</option>
+                        <option value="9">9 half somersaults</option>
+                    </select>
+                </div>
+                <div class="checkbox">
+                    <input type="checkbox" name="checkbox"><span>I agree to the <a href="https://olympics.com/en/privacy-policy">Privacy Policy for Olympics.</a></span>
+                </div>
+                <button type="submit">Submit</button>
+            </EditForm>
+            <div class="left-part">
+                <i class="fas fa-graduation-cap"></i>
+                <h1>Diving News</h1>
+                <p>Click on the button latest diving sport news </p>
+                <div class="btn-group">
+                    <a class="btn-item" href="https://olympics.com/en/sports/diving/">Olympics</a>
+                    <a class="btn-item" href="https://www.svensksimidrott.se/varasimidrotter/Simhopp/Nyheter">Simhopp</a>
+                </div>
             </div>
         </div>
-    </div>
-</body>
+    </body>
 </html>
+}
 
+@if (status.Value_ != 1)
+{
+    <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+}
 
 @code {
 
     Participants participants = new Participants();
 
+    CompetitionStatus status = new CompetitionStatus();
+
     protected async Task ParticipantsInsert()
     {
-
+        status = await CompetitionService.GetStatus();
         participants.Dive1_Init_position = "0";
         participants.Dive2_Init_position = "0";
         participants.Dive3_Init_position = "0";
