@@ -5,7 +5,7 @@
 @page "/Scoreboard"
 @inject IParticipantsService ParticipantsService
 @inject ICompetitionServices CompetitionService
-
+@inject IScoreServices ScoreService
 
 @if (status.Value_ == 3)
 {
@@ -74,14 +74,20 @@ else
                     <tbody>
                         @foreach (var participant in Current)
                         {
-                            <tr>
-                                <td>@participant.FirstName</td>
-                                <td>@participant.LastName</td>
-                                <td>@participant.club</td>
-                                <td>@participant.Total_results</td>
+                            @foreach (var score in scores)
+                            {
+                                if (participant.ID== score.SCID)
+                                {
+                                    <tr>
+                                        <td>@participant.FirstName</td>
+                                        <td>@participant.LastName</td>
+                                        <td>@participant.club</td>
+                                        <td>@score.Final_Total</td>
 
-                            </tr>
+                                    </tr>
 
+                                }
+                            }
                         }
                     </tbody>
                 </table>
@@ -100,16 +106,19 @@ else
     IEnumerable<Participants> participants8;
     IEnumerable<Participants> participants3;
     IEnumerable<Participants> Current;
+    IEnumerable<Scores> scores;
 
 
     CompetitionStatus status = new CompetitionStatus();
     protected override async Task OnInitializedAsync()
     {
         status = await CompetitionService.GetStatus();
+        scores = await ScoreService.ScoreList();
         participants32 = await ParticipantsService.Top32();
         participants16 = await ParticipantsService.Top16();
         participants8 = await ParticipantsService.Top8();
         participants3 = await ParticipantsService.Top3();
+
     }
 
 }

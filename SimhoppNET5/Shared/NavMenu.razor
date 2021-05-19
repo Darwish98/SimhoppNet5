@@ -41,11 +41,14 @@
                         </NavLink>
                     </li>
                 </AuthorizeView>
-                    <li class="nav-item px-3">
-                        <NavLink class="nav-link" href="ParticipantsScore">
-                            <span class="oi oi-list-rich" aria-hidden="true"></span> Participants Score
-                        </NavLink>
-                    </li>
+                    @if (status.Value_ >=3 && status.Value_ <= 5 )
+                    {
+                        <li class="nav-item px-3">
+                            <NavLink class="nav-link" href="ParticipantsScore">
+                                <span class="oi oi-list-rich" aria-hidden="true"></span> Participants Score
+                            </NavLink>
+                        </li>
+                    }
                 </ul>
             </div>
         </Authorized>

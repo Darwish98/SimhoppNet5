@@ -25,19 +25,19 @@
                 <div class="info">
                     <AuthorizeView Roles="Judge1, Admin" Context="Auth1">
                         <label>Difficulty: You set difficulty</label>
-                        <input class="fname" type="number" @bind="scores.Dive1_Difficulty" name="name" min="0" max="10" required>
+                        <input class="fname" type="number" @bind="scores.Dive1_Difficulty" name="name" min="0" max="10" step="0.5" required>
                         <label>Judge1_result</label>
-                        <input class="fname" type="number" @bind="scores.Dive1_Judge1_result" name="name" min="0" max="10" required>
+                        <input class="fname" type="number" @bind="scores.Dive1_Judge1_result" name="name" min="0" max="10" step="0.5" required>
                     </AuthorizeView>
                     <AuthorizeView Roles="Judge2 , Admin">
                         <label>Difficulty is set by Judge 1</label>
                         <label>Judge2_result</label>
-                        <input class="fname" type="number" @bind="scores.Dive1_Judge2_result" name="name" min="0" max="10" required>
+                        <input class="fname" type="number" @bind="scores.Dive1_Judge2_result" name="name" min="0" max="10" step="0.5" required>
                     </AuthorizeView>
                     <AuthorizeView Roles="Judge3, Admin">
                         <label>Difficulty is set by Judge 1</label>
                         <label>Judge3_result</label>
-                        <input class="fname" type="number" @bind="scores.Dive1_Judge3_result" name="name" min="0" max="10" required>
+                        <input class="fname" type="number" @bind="scores.Dive1_Judge3_result" name="name" min="0" max="10"  step="0.5" required>
                     </AuthorizeView>
 
                 </div>
@@ -49,19 +49,19 @@
                 <div class="info">
                     <AuthorizeView Roles="Judge1, Admin" Context="Auth2">
                         <label>Difficulty: You set difficulty</label>
-                        <input class="fname" type="number" @bind="scores.Dive2_Difficulty" name="name" min="0" max="10" required>
+                        <input class="fname" type="number" @bind="scores.Dive2_Difficulty" name="name" min="0" max="10"  step="0.5" required>
                         <label>Judge1_result</label>
-                        <input class="fname" type="number" @bind="scores.Dive2_Judge1_result" name="name" min="0" max="10" required>
+                        <input class="fname" type="number" @bind="scores.Dive2_Judge1_result" name="name" min="0" max="10"  step="0.5" required>
                     </AuthorizeView>
                     <AuthorizeView Roles="Judge2 , Admin">
                         <label>Difficulty is set by Judge 1</label>
                         <label>Judge2_result</label>
-                        <input class="fname" type="number" @bind="scores.Dive2_Judge2_result" name="name" min="0" max="10" required>
+                        <input class="fname" type="number" @bind="scores.Dive2_Judge2_result" name="name" min="0" max="10" step="0.5" required>
                     </AuthorizeView>
                     <AuthorizeView Roles="Judge3, Admin">
                         <label>Difficulty is set by Judge 1</label>
                         <label>Judge3_result</label>
-                        <input class="fname" type="number" @bind="scores.Dive2_Judge3_result" name="name" min="0" max="10" required>
+                        <input class="fname" type="number" @bind="scores.Dive2_Judge3_result" name="name" min="0" max="10" step="0.5"  required>
                     </AuthorizeView>
 
                 </div>
@@ -72,19 +72,19 @@
                 <div class="info">
                     <AuthorizeView Roles="Judge1, Admin" Context="Auth3">
                         <label>Difficulty: You set difficulty</label>
-                        <input class="fname" type="number" @bind="scores.Dive3_Difficulty" name="name" min="0" max="10" required>
+                        <input class="fname" type="number" @bind="scores.Dive3_Difficulty" name="name" min="0" max="10"  step="0.5" required>
                         <label>Judge1_result</label>
-                        <input class="fname" type="number" @bind="scores.Dive3_Judge1_result" name="name" min="0" max="10" required>
+                        <input class="fname" type="number" @bind="scores.Dive3_Judge1_result" name="name" min="0" max="10" step="0.5" required>
                     </AuthorizeView>
                     <AuthorizeView Roles="Judge2 , Admin">
                         <label>Difficulty is set by Judge 1</label>
                         <label>Judge2_result</label>
-                        <input class="fname" type="number" @bind="scores.Dive3_Judge2_result" name="name" min="0" max="10" required>
+                        <input class="fname" type="number" @bind="scores.Dive3_Judge2_result" name="name" min="0" max="10" step="0.5"  required>
                     </AuthorizeView>
                     <AuthorizeView Roles="Judge3, Admin">
                         <label>Difficulty is set by Judge 1</label>
                         <label>Judge3_result</label>
-                        <input class="fname" type="number" @bind="scores.Dive3_Judge3_result" name="name" min="0" max="10" required>
+                        <input class="fname" type="number" @bind="scores.Dive3_Judge3_result" name="name" min="0" max="10" step="0.5" required>
                     </AuthorizeView>
 
                 </div>
