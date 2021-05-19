@@ -157,10 +157,12 @@
     Participants participants = new Participants();
 
     CompetitionStatus status = new CompetitionStatus();
-
-    protected async Task ParticipantsInsert()
+    protected override async Task OnInitializedAsync()
     {
         status = await CompetitionService.GetStatus();
+    }
+    protected async Task ParticipantsInsert()
+    {
         participants.Dive1_Init_position = "0";
         participants.Dive2_Init_position = "0";
         participants.Dive3_Init_position = "0";
